@@ -9,7 +9,7 @@ const cognitoRegion = 'ap-southeast-2';
 const cognitoDomain = 'ap-southeast-2bl19yktd2.auth.ap-southeast-2.amazoncognito.com';
 
 // ✔ URL CloudFront của bạn
-const cloudFrontUrl = 'https://d3uigjtlhbwpv6.cloudfront.net';
+const cloudFrontUrl = 'https://d3uigjl9bwpjv6.cloudfront.net';
 
 // API Gateway endpoints
 const quickSightApiUrl = 'https://q883ljud55.execute-api.ap-southeast-2.amazonaws.com/prod/dashboard';
@@ -254,24 +254,27 @@ window.onload = function () {
 };
 
 // ==========================
-// 9. SIGN OUT FUNCTION
+// 9. LOG OUT FUNCTION
 // ==========================    
-    function logOutUser() {
-        localStorage.removeItem('CognitoAccessToken'); 
-        localStorage.removeItem('CognitoIdToken'); 
-        
-        const logoutUrl = `${cognitoDomain}/logout?client_id=${cognitoClientId}&logout_uri=${cloudFrontUrl}`;
-        window.location.href = logoutUrl;
-    }
+window.logOutUser = function() {
+    const cognitoUser = userPool.getCurrentUser();
+        if (cognitoUser) {
+            cognitoUser.signOut();
+        }
     
-    // function checkAuthAndDisplayUser() {
-    //     const accessToken = localStorage.getItem('CognitoAccessToken');
-    //     if (accessToken) {
-    //         document.getElementById('userName').textContent = "Hi, User (Authenticated)";
-    //     } else {
-    //         // const loginUrl = `${cognitoDomain}/login?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}`;
-    //         // window.location.href = loginUrl;
-    //     }
-    // }
+    localStorage.removeItem('CognitoAccessToken'); 
+    localStorage.removeItem('CognitoIdToken'); 
     
-    // document.addEventListener('DOMContentLoaded', checkAuthAndDisplayUser);
+    const logoutUrl = `https://${cognitoDomain}/logout?client_id=${cognitoClientId}&logout_uri=${cloudFrontUrl}`;
+    window.location.href = logoutUrl; 
+};
+    
+// ===============================================
+// 10. (OPTIONAL) HOOKUP LOGOUT BUTTON
+// ===============================================
+// document.addEventListener('DOMContentLoaded', () => {
+//     const logoutBtn = document.getElementById('logoutButton');
+//     if (logoutBtn) {
+//         logoutBtn.addEventListener('click', logOutUser);
+//     }
+// });
