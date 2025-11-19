@@ -184,12 +184,44 @@
             padding: 40px;
         }
 
+        #ticket-modal .modal-content { 
+            width: 400px; 
+            max-width: 90%; 
+            padding: 20px; 
+        }
+
+        #ticket-content { 
+            width: 100%; 
+            margin: 10px 0;
+            padding: 10px; 
+            font-size: 0.9rem; 
+        }
+
+        #send-ticket-button { 
+            background-color: #0073bb; 
+            color: #fff; 
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+
+        #send-ticket-button:hover { 
+            background-color: #005f91; 
+        }
+
     </style>
 
     <!-- Tải các thư viện SDK -->
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1149.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@5.2.10/dist/amazon-cognito-identity.min.js"></script>
-    <script src="https://unpkg.com/amazon-quicksight-embedding-sdk@2.0.0/dist/quicksight-embedding-sdk.min.js"></script>
+    <script src="https://app.unpkg.com/amazon-quicksight-embedding-sdk@2.10.2/dist/quicksight-embedding-sdk.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){emailjs.init("M13DNidXklQypZkjO");})();  // Thay YOUR_USER_ID bằng EmailJS user ID
+    </script>
 </head>
 <body>
 
@@ -201,7 +233,11 @@
             </div>
             <div class="user-info">
                 <span id="userEmail">Đang tải...</span>
+<<<<<<< Updated upstream
                 <button id="logoutButton" onclick = "logOutUser()">Đăng xuất</button>
+=======
+                <button id="logoutButton">Đăng xuất</button>
+>>>>>>> Stashed changes
             </div>
         </header>
 
@@ -224,6 +260,18 @@
         </div>
     </div>
 
+    <button class="ticket-button">Viết Ticket</button>
+    <div id="ticket-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Gửi Ticket cho <span id="ticket-device-name"></span></h2>
+                <span class="modal-close" id="ticket-close-button">&times;</span>
+            </div>
+            <textarea id="ticket-content" rows="5" placeholder="Nội dung ticket..."></textarea>
+            <button id="send-ticket-button">Gửi Ticket</button>
+            <p id="ticket-status"></p>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 
