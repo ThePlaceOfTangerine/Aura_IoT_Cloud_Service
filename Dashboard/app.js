@@ -250,10 +250,10 @@ window.onload = function () {
             : onFailure();
     }
 
-    const user = userPool.getCurrentUser();
-    user
-        ? user.getSession((err, session) => err ? onFailure() : onSuccess(session))
-        : onFailure();
+    // const user = userPool.getCurrentUser();
+    // user
+    //     ? user.getSession((err, session) => err ? onFailure() : onSuccess(session))
+    //     : onFailure();
 };
 
 
